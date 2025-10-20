@@ -28,156 +28,183 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = true;
-            this.StartPosition = FormStartPosition.CenterScreen;
-
             gbInput = new GroupBox();
+            orangeLine = new Panel();
+            btnConvert = new Button();
+            pnlControls = new Panel();
             edFunction = new TextBox();
             edMaxRowLength = new TextBox();
-            btnConvert = new Button();
             label2 = new Label();
             label1 = new Label();
-            cbHexFlag = new CheckBox();
             edInput = new TextBox();
-
+            cbHexFlag = new CheckBox();
             gbOutput = new GroupBox();
             btnClipBoard = new Button();
             edOutput = new TextBox();
-
             gbInput.SuspendLayout();
+            orangeLine.SuspendLayout();
+            pnlControls.SuspendLayout();
             gbOutput.SuspendLayout();
             SuspendLayout();
-
-            // === gbInput ===
-            gbInput.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            // 
+            // gbInput
+            // 
             gbInput.BackColor = Color.FromArgb(50, 50, 50);
-            gbInput.Controls.Add(edFunction);
-            gbInput.Controls.Add(edMaxRowLength);
-            gbInput.Controls.Add(btnConvert);
-            gbInput.Controls.Add(label2);
-            gbInput.Controls.Add(label1);
-            gbInput.Controls.Add(cbHexFlag);
-            gbInput.Controls.Add(edInput);
+            gbInput.Controls.Add(orangeLine);
+            gbInput.Controls.Add(pnlControls);
+            gbInput.Dock = DockStyle.Top;
+            gbInput.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 204);
             gbInput.ForeColor = Color.FromArgb(250, 180, 85);
-            gbInput.Location = new Point(-1, -2);
+            gbInput.Location = new Point(0, 0);
             gbInput.Name = "gbInput";
-            gbInput.Size = new Size(1183, 300);
+            gbInput.Size = new Size(1182, 300);
             gbInput.TabIndex = 0;
             gbInput.TabStop = false;
             gbInput.Text = "Vstupný Text";
             gbInput.Paint += PaintBorderlessGroupBox;
-
-            // === edFunction ===
-            edFunction.Location = new Point(669, 149);
-            edFunction.Name = "edFunction";
-            edFunction.Size = new Size(125, 27);
-            edFunction.TabIndex = 7;
-            edFunction.TextChanged += edFunction_TextChanged;
-
-            // === edMaxRowLength ===
-            edMaxRowLength.Location = new Point(377, 149);
-            edMaxRowLength.Name = "edMaxRowLength";
-            edMaxRowLength.Size = new Size(125, 27);
-            edMaxRowLength.TabIndex = 2;
-            edMaxRowLength.Text = "100";
-            edMaxRowLength.TextChanged += edMaxRowLength_TextChanged;
-
-            // === btnConvert ===
-            btnConvert.Location = new Point(471, 206);
+            gbInput.Layout += gbInput_Layout;
+            // 
+            // orangeLine
+            // 
+            orangeLine.BackColor = Color.FromArgb(250, 180, 85);
+            orangeLine.Controls.Add(btnConvert);
+            orangeLine.Dock = DockStyle.Bottom;
+            orangeLine.Location = new Point(3, 238);
+            orangeLine.Name = "orangeLine";
+            orangeLine.Size = new Size(1176, 59);
+            orangeLine.TabIndex = 8;
+            // 
+            // btnConvert
+            // 
+            btnConvert.Anchor = AnchorStyles.None;
+            btnConvert.BackColor = Color.Transparent;
+            btnConvert.Location = new Point(488, 0);
             btnConvert.Name = "btnConvert";
             btnConvert.Size = new Size(240, 59);
             btnConvert.TabIndex = 6;
             btnConvert.Text = "Konvertovať";
-            btnConvert.UseVisualStyleBackColor = true;
+            btnConvert.UseVisualStyleBackColor = false;
             btnConvert.Click += btnConvert_Click;
-
-            Panel orangeLine = new Panel();
-            orangeLine.BackColor = Color.FromArgb(250, 180, 85);
-            orangeLine.Location = new Point(0, btnConvert.Top - 10);
-            orangeLine.Size = new Size(gbInput.Width, btnConvert.Height + 20);
-            orangeLine.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-            orangeLine.SendToBack();
-            gbInput.Controls.Add(orangeLine);
-            gbInput.Controls.SetChildIndex(orangeLine, gbInput.Controls.Count - 1);
-
-            // === label2 ===
+            // 
+            // pnlControls
+            // 
+            pnlControls.Controls.Add(edFunction);
+            pnlControls.Controls.Add(edMaxRowLength);
+            pnlControls.Controls.Add(label2);
+            pnlControls.Controls.Add(label1);
+            pnlControls.Controls.Add(edInput);
+            pnlControls.Controls.Add(cbHexFlag);
+            pnlControls.Dock = DockStyle.Top;
+            pnlControls.Location = new Point(3, 27);
+            pnlControls.Name = "pnlControls";
+            pnlControls.Size = new Size(1176, 205);
+            pnlControls.TabIndex = 12;
+            // 
+            // edFunction
+            // 
+            edFunction.Location = new Point(660, 98);
+            edFunction.Name = "edFunction";
+            edFunction.Size = new Size(125, 31);
+            edFunction.TabIndex = 7;
+            edFunction.TextChanged += edFunction_TextChanged;
+            // 
+            // edMaxRowLength
+            // 
+            edMaxRowLength.Location = new Point(316, 98);
+            edMaxRowLength.Name = "edMaxRowLength";
+            edMaxRowLength.Size = new Size(125, 31);
+            edMaxRowLength.TabIndex = 2;
+            edMaxRowLength.Text = "100";
+            // 
+            // label2
+            // 
             label2.AutoSize = true;
-            label2.Location = new Point(526, 155);
+            label2.Location = new Point(488, 102);
             label2.Name = "label2";
-            label2.Size = new Size(137, 20);
+            label2.Size = new Size(166, 25);
             label2.TabIndex = 5;
             label2.Text = "Vlastná Chr funkcia:";
-
-            // === label1 ===
+            // 
+            // label1
+            // 
             label1.AutoSize = true;
-            label1.Location = new Point(202, 155);
+            label1.Location = new Point(109, 101);
             label1.Name = "label1";
-            label1.Size = new Size(169, 20);
+            label1.Size = new Size(201, 25);
             label1.TabIndex = 2;
             label1.Text = "Maximálna dĺžka riadku:";
-
-            // === cbHexFlag ===
-            cbHexFlag.AutoSize = true;
-            cbHexFlag.Location = new Point(13, 151);
-            cbHexFlag.Name = "cbHexFlag";
-            cbHexFlag.Size = new Size(57, 24);
-            cbHexFlag.TabIndex = 1;
-            cbHexFlag.Text = "Hex";
-            cbHexFlag.UseVisualStyleBackColor = true;
-
-            // === edInput ===
-            edInput.Location = new Point(13, 55);
+            // 
+            // edInput
+            // 
+            edInput.Location = new Point(10, 3);
             edInput.Multiline = true;
             edInput.Name = "edInput";
             edInput.ScrollBars = ScrollBars.Both;
             edInput.Size = new Size(1160, 90);
             edInput.TabIndex = 0;
-            edInput.TextChanged += edInput_TextChanged;
-
-            // === gbOutput ===
-            gbOutput.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            // 
+            // cbHexFlag
+            // 
+            cbHexFlag.AutoSize = true;
+            cbHexFlag.Location = new Point(10, 100);
+            cbHexFlag.Name = "cbHexFlag";
+            cbHexFlag.Size = new Size(64, 29);
+            cbHexFlag.TabIndex = 1;
+            cbHexFlag.Text = "Hex";
+            cbHexFlag.UseVisualStyleBackColor = true;
+            // 
+            // gbOutput
+            // 
             gbOutput.BackColor = Color.FromArgb(50, 50, 50);
             gbOutput.Controls.Add(btnClipBoard);
             gbOutput.Controls.Add(edOutput);
+            gbOutput.Dock = DockStyle.Fill;
+            gbOutput.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 204);
             gbOutput.ForeColor = Color.FromArgb(250, 180, 85);
-            gbOutput.Location = new Point(-1, 295);
+            gbOutput.Location = new Point(0, 300);
             gbOutput.Name = "gbOutput";
-            gbOutput.Size = new Size(1183, 300);
+            gbOutput.Size = new Size(1182, 293);
             gbOutput.TabIndex = 1;
             gbOutput.TabStop = false;
             gbOutput.Text = "Výstupný text";
             gbOutput.Paint += PaintBorderlessGroupBox;
-
-            // === btnClipBoard ===
+            // 
+            // btnClipBoard
+            // 
+            btnClipBoard.BackColor = Color.Transparent;
             btnClipBoard.Location = new Point(13, 224);
             btnClipBoard.Name = "btnClipBoard";
             btnClipBoard.Size = new Size(138, 40);
             btnClipBoard.TabIndex = 1;
             btnClipBoard.Text = "Kopírovať";
-            btnClipBoard.UseVisualStyleBackColor = true;
+            btnClipBoard.UseVisualStyleBackColor = false;
             btnClipBoard.Click += btnClipBoard_Click;
-
-            // === edOutput ===
+            // 
+            // edOutput
+            // 
             edOutput.Location = new Point(13, 59);
             edOutput.Multiline = true;
             edOutput.Name = "edOutput";
             edOutput.ScrollBars = ScrollBars.Both;
             edOutput.Size = new Size(1160, 159);
             edOutput.TabIndex = 0;
-
-            // === frmJNTConvertor ===
+            // 
+            // frmJNTConvertor
+            // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1182, 593);
             Controls.Add(gbOutput);
             Controls.Add(gbInput);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "frmJNTConvertor";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "new VBA Unicode Convertor";
-
             gbInput.ResumeLayout(false);
-            gbInput.PerformLayout();
+            orangeLine.ResumeLayout(false);
+            pnlControls.ResumeLayout(false);
+            pnlControls.PerformLayout();
             gbOutput.ResumeLayout(false);
             gbOutput.PerformLayout();
             ResumeLayout(false);
@@ -190,17 +217,20 @@
             GroupBox box = (GroupBox)sender;
             Rectangle rect = box.ClientRectangle;
 
-            using (SolidBrush solidBrush = new SolidBrush(box.BackColor))
-                p.Graphics.FillRectangle(solidBrush, rect);
+            SizeF textSize = p.Graphics.MeasureString(box.Text, box.Font);
+            Rectangle titleRect = new Rectangle(0, 0, rect.Width, (int)(textSize.Height * 1.8));
+
+            using (SolidBrush headerBrush = new SolidBrush(box.BackColor))
+                p.Graphics.FillRectangle(headerBrush, titleRect);
 
             using (SolidBrush textBrush = new SolidBrush(box.ForeColor))
             {
-                SizeF textSize = p.Graphics.MeasureString(box.Text, box.Font);
                 int textX = 10;
                 int textY = (int)(textSize.Height / 10);
                 p.Graphics.DrawString(box.Text, box.Font, textBrush, textX, textY);
             }
         }
+
 
         private GroupBox gbInput;
         private TextBox edInput;
@@ -213,5 +243,7 @@
         private Button btnClipBoard;
         private TextBox edFunction;
         private TextBox edMaxRowLength;
+        private Panel orangeLine;
+        private Panel pnlControls;
     }
 }
