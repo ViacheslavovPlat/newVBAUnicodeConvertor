@@ -39,62 +39,67 @@ namespace newVBAUnicodeConvertor
 
         private string convertToUtf32(string str, bool useHex = false)
         {
-            byte convMode = 0;
-            int ln = str.Length;
-            int c = 0;
+            byte prevMode = 0, convMode = 0;
+            int len = str.Length;
+            int rowLen = 0;
 
-            StringBuilder sb = new StringBuilder(ln << 1);
+            StringBuilder sb = new StringBuilder(len << 1);
 
             if (string.IsNullOrEmpty(str))
                 return "\"\"";
 
-            if (maxRowLength < 1)
-                maxRowLength = 1;
+            if (maxRowLength < 20)
+                maxRowLength = 20;
 
-            for (int i = 0; i < ln; ++i)
+            for (int i = 0; i < len; ++i)
             {
                 char ch = str[i];
                 int charVal = (int)ch;
                 string s = "";
+                prevMode = convMode;
 
-                if (charVal >= 32 && charVal <= 127)
+                if (charVal >= 32 && charVal <= 126)
                 {
-                    if (convMode == 0)
+                    convMode = 1;
+                    if (prevMode == 0)
+                    {
                         s += "\"";
-                    else if (convMode == 2)
+                    }
+                    else if (prevMode == 2) 
+                    { 
                         s += " & \"";
+                    }
 
                     if (charVal == 34)
                         s += "\"\"";
                     else
                         s += ch;
-
-                    convMode = 1;
                 }
                 else if (charVal <= 65535)
                 {
-                    string code = useHex ? $"&H{charVal:X}" : charVal.ToString();
-                    s = (convMode == 1 ? "\" & " : convMode == 2 ? " & " : "") + customFunction + "(" + code + ")";
                     convMode = 2;
+                    string code = useHex ? $"&H{charVal:X}" : charVal.ToString();
+                    if (prevMode == 1)
+                    {
+                        s += "\" & ";
+                    } 
+                    else if (prevMode == 2) 
+                    {
+                        s += " & ";
+                    }
+                    s += customFunction + "(" + code + ")";
                 }
 
-                bool hasNext = (i + 1 < ln);
+                bool hasNext = (i + 1 < len);
 
-                if (c + s.Length + 4 >= maxRowLength)
+                if (rowLen + s.Length + 5 >= maxRowLength && hasNext)
                 {
-                    if (hasNext)
-                        s += convMode == 1 ? "\" & _\r\n" : " & _\r\n";
-
+                    s += convMode == 1 ? "\" & _\r\n" : " & _\r\n";
+                    rowLen = 0;
                     convMode = 0;
-                    c = 0;
                 }
-                else
-                {
-                    c += s.Length;
-                }
-
-                if (s.Length > 0)
-                    sb.Append(s);
+                rowLen += s.Length;
+                sb.Append(s);
             }
 
             if (convMode == 1)
