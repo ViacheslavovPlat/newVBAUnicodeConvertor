@@ -41,6 +41,7 @@
             gbOutput = new GroupBox();
             btnClipBoard = new Button();
             edOutput = new TextBox();
+            cbMsgBox = new CheckBox();
             gbInput.SuspendLayout();
             orangeLine.SuspendLayout();
             pnlControls.SuspendLayout();
@@ -57,7 +58,7 @@
             gbInput.ForeColor = Color.FromArgb(250, 180, 85);
             gbInput.Location = new Point(0, 0);
             gbInput.Name = "gbInput";
-            gbInput.Size = new Size(1182, 300);
+            gbInput.Size = new Size(1179, 300);
             gbInput.TabIndex = 0;
             gbInput.TabStop = false;
             gbInput.Text = "Vstupný Text";
@@ -71,37 +72,38 @@
             orangeLine.Dock = DockStyle.Bottom;
             orangeLine.Location = new Point(3, 238);
             orangeLine.Name = "orangeLine";
-            orangeLine.Size = new Size(1176, 59);
+            orangeLine.Size = new Size(1173, 59);
             orangeLine.TabIndex = 8;
             // 
             // btnConvert
             // 
             btnConvert.Anchor = AnchorStyles.None;
-            btnConvert.BackColor = Color.Transparent;
-            btnConvert.Location = new Point(488, 0);
+            btnConvert.BackColor = Color.WhiteSmoke;
+            btnConvert.FlatAppearance.BorderColor = Color.FromArgb(250, 180, 85);
+            btnConvert.FlatStyle = FlatStyle.Flat;
+            btnConvert.ForeColor = Color.FromArgb(50, 50, 50);
+            btnConvert.Location = new Point(486, 0);
             btnConvert.Name = "btnConvert";
             btnConvert.Size = new Size(240, 50);
             btnConvert.TabIndex = 6;
             btnConvert.Text = "Konvertovať";
-            btnConvert.ForeColor = gbInput.BackColor;
             btnConvert.UseVisualStyleBackColor = false;
-            btnConvert.FlatStyle = FlatStyle.Flat;
-            btnConvert.FlatAppearance.BorderColor = orangeLine.BackColor;
-            btnConvert.BackColor = Color.WhiteSmoke;
             btnConvert.Click += btnConvert_Click;
             // 
             // pnlControls
             // 
+            pnlControls.BackColor = Color.FromArgb(50, 50, 50);
+            pnlControls.Controls.Add(cbMsgBox);
             pnlControls.Controls.Add(edFunction);
             pnlControls.Controls.Add(edMaxRowLength);
             pnlControls.Controls.Add(label2);
             pnlControls.Controls.Add(label1);
             pnlControls.Controls.Add(edInput);
             pnlControls.Controls.Add(cbHexFlag);
-            pnlControls.Dock = DockStyle.Top;
+            pnlControls.Dock = DockStyle.Fill;
             pnlControls.Location = new Point(3, 27);
             pnlControls.Name = "pnlControls";
-            pnlControls.Size = new Size(1176, 205);
+            pnlControls.Size = new Size(1173, 270);
             pnlControls.TabIndex = 12;
             // 
             // edFunction
@@ -167,7 +169,7 @@
             gbOutput.ForeColor = Color.FromArgb(250, 180, 85);
             gbOutput.Location = new Point(0, 300);
             gbOutput.Name = "gbOutput";
-            gbOutput.Size = new Size(1182, 293);
+            gbOutput.Size = new Size(1179, 293);
             gbOutput.TabIndex = 1;
             gbOutput.TabStop = false;
             gbOutput.Text = "Výstupný text";
@@ -175,7 +177,10 @@
             // 
             // btnClipBoard
             // 
-            btnClipBoard.BackColor = Color.Transparent;
+            btnClipBoard.BackColor = Color.WhiteSmoke;
+            btnClipBoard.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnClipBoard.FlatStyle = FlatStyle.Flat;
+            btnClipBoard.ForeColor = Color.FromArgb(50, 50, 50);
             btnClipBoard.Location = new Point(13, 224);
             btnClipBoard.Name = "btnClipBoard";
             btnClipBoard.Size = new Size(138, 40);
@@ -193,13 +198,25 @@
             edOutput.Size = new Size(1160, 159);
             edOutput.TabIndex = 0;
             // 
+            // cbMsgBox
+            // 
+            cbMsgBox.AutoSize = true;
+            cbMsgBox.Location = new Point(823, 98);
+            cbMsgBox.Name = "cbMsgBox";
+            cbMsgBox.Size = new Size(98, 29);
+            cbMsgBox.TabIndex = 8;
+            cbMsgBox.Text = "MsgBox";
+            cbMsgBox.UseVisualStyleBackColor = true;
+            // 
             // frmJNTConvertor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1182, 593);
+            BackColor = Color.FromArgb(50, 50, 50);
+            ClientSize = new Size(1179, 593);
             Controls.Add(gbOutput);
             Controls.Add(gbInput);
+            ForeColor = Color.FromArgb(250, 180, 85);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "frmJNTConvertor";
@@ -233,8 +250,8 @@
                 int textY = (int)(textSize.Height / 10);
                 p.Graphics.DrawString(box.Text, box.Font, textBrush, textX, textY);
             }
+            p.Graphics.Clear(box.BackColor);
         }
-
 
         private GroupBox gbInput;
         private TextBox edInput;
@@ -249,5 +266,6 @@
         private TextBox edMaxRowLength;
         private Panel orangeLine;
         private Panel pnlControls;
+        private CheckBox cbMsgBox;
     }
 }

@@ -29,12 +29,14 @@ namespace newVBAUnicodeConvertor
 
             this.input = edInput.Text;
             string convertedRes = convertToUtf32(input, cbHexFlag.Checked);
-
-            edOutput.Text = convertedRes;
-        }
-        private void insertMsgBox(string input)
-        {
-
+            if (cbMsgBox.Checked)
+            {
+                edOutput.Text = $"MsgBox({convertedRes})";
+            }
+            else 
+            {
+                edOutput.Text = convertedRes;
+            }
         }
 
         private string convertToUtf32(string str, bool useHex = false)
