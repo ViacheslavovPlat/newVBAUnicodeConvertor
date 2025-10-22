@@ -116,7 +116,8 @@ namespace newVBAUnicodeConvertor
 
         private void btnClipBoard_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(edOutput.Text);
+            if(!string.IsNullOrEmpty(edOutput.Text))
+                Clipboard.SetText(edOutput.Text);
         }
 
         /*private void cbMsgBox_CheckedChanged(object sender, EventArgs e)

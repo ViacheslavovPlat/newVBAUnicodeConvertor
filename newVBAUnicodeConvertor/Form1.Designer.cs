@@ -80,10 +80,14 @@
             btnConvert.BackColor = Color.Transparent;
             btnConvert.Location = new Point(488, 0);
             btnConvert.Name = "btnConvert";
-            btnConvert.Size = new Size(240, 59);
+            btnConvert.Size = new Size(240, 50);
             btnConvert.TabIndex = 6;
             btnConvert.Text = "Konvertovať";
+            btnConvert.ForeColor = gbInput.BackColor;
             btnConvert.UseVisualStyleBackColor = false;
+            btnConvert.FlatStyle = FlatStyle.Flat;
+            btnConvert.FlatAppearance.BorderColor = orangeLine.BackColor;
+            btnConvert.BackColor = Color.WhiteSmoke;
             btnConvert.Click += btnConvert_Click;
             // 
             // pnlControls
@@ -178,6 +182,10 @@
             btnClipBoard.TabIndex = 1;
             btnClipBoard.Text = "Kopírovať";
             btnClipBoard.UseVisualStyleBackColor = false;
+            btnClipBoard.FlatStyle = FlatStyle.Flat;
+            btnClipBoard.FlatAppearance.BorderColor = gbOutput.BackColor;
+            btnClipBoard.BackColor = Color.WhiteSmoke;
+            btnClipBoard.ForeColor = gbOutput.BackColor;
             btnClipBoard.Click += btnClipBoard_Click;
             // 
             // edOutput
