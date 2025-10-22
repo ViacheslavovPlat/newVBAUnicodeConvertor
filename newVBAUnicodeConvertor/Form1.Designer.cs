@@ -32,6 +32,7 @@
             orangeLine = new Panel();
             btnConvert = new Button();
             pnlControls = new Panel();
+            cbMsgBox = new CheckBox();
             edFunction = new TextBox();
             edMaxRowLength = new TextBox();
             label2 = new Label();
@@ -41,7 +42,6 @@
             gbOutput = new GroupBox();
             btnClipBoard = new Button();
             edOutput = new TextBox();
-            cbMsgBox = new CheckBox();
             gbInput.SuspendLayout();
             orangeLine.SuspendLayout();
             pnlControls.SuspendLayout();
@@ -64,6 +64,7 @@
             gbInput.Text = "Vstupný Text";
             gbInput.Paint += PaintBorderlessGroupBox;
             gbInput.Layout += gbInput_Layout;
+            gbInput.Padding = new Padding(0, 25, 0, 0);
             // 
             // orangeLine
             // 
@@ -105,6 +106,16 @@
             pnlControls.Name = "pnlControls";
             pnlControls.Size = new Size(1173, 270);
             pnlControls.TabIndex = 12;
+            // 
+            // cbMsgBox
+            // 
+            cbMsgBox.AutoSize = true;
+            cbMsgBox.Location = new Point(823, 98);
+            cbMsgBox.Name = "cbMsgBox";
+            cbMsgBox.Size = new Size(98, 29);
+            cbMsgBox.TabIndex = 8;
+            cbMsgBox.Text = "MsgBox";
+            cbMsgBox.UseVisualStyleBackColor = true;
             // 
             // edFunction
             // 
@@ -169,11 +180,12 @@
             gbOutput.ForeColor = Color.FromArgb(250, 180, 85);
             gbOutput.Location = new Point(0, 300);
             gbOutput.Name = "gbOutput";
-            gbOutput.Size = new Size(1179, 293);
+            gbOutput.Size = new Size(1179, 255);
             gbOutput.TabIndex = 1;
             gbOutput.TabStop = false;
             gbOutput.Text = "Výstupný text";
             gbOutput.Paint += PaintBorderlessGroupBox;
+            gbOutput.Padding = new Padding(0, 25, 0, 0);
             // 
             // btnClipBoard
             // 
@@ -181,7 +193,7 @@
             btnClipBoard.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
             btnClipBoard.FlatStyle = FlatStyle.Flat;
             btnClipBoard.ForeColor = Color.FromArgb(50, 50, 50);
-            btnClipBoard.Location = new Point(13, 224);
+            btnClipBoard.Location = new Point(13, 195);
             btnClipBoard.Name = "btnClipBoard";
             btnClipBoard.Size = new Size(138, 40);
             btnClipBoard.TabIndex = 1;
@@ -191,29 +203,19 @@
             // 
             // edOutput
             // 
-            edOutput.Location = new Point(13, 59);
+            edOutput.Location = new Point(13, 30);
             edOutput.Multiline = true;
             edOutput.Name = "edOutput";
             edOutput.ScrollBars = ScrollBars.Both;
             edOutput.Size = new Size(1160, 159);
             edOutput.TabIndex = 0;
             // 
-            // cbMsgBox
-            // 
-            cbMsgBox.AutoSize = true;
-            cbMsgBox.Location = new Point(823, 98);
-            cbMsgBox.Name = "cbMsgBox";
-            cbMsgBox.Size = new Size(98, 29);
-            cbMsgBox.TabIndex = 8;
-            cbMsgBox.Text = "MsgBox";
-            cbMsgBox.UseVisualStyleBackColor = true;
-            // 
             // frmJNTConvertor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(50, 50, 50);
-            ClientSize = new Size(1179, 593);
+            ClientSize = new Size(1179, 555);
             Controls.Add(gbOutput);
             Controls.Add(gbInput);
             ForeColor = Color.FromArgb(250, 180, 85);
@@ -238,6 +240,8 @@
             GroupBox box = (GroupBox)sender;
             Rectangle rect = box.ClientRectangle;
 
+            p.Graphics.Clear(box.BackColor);
+
             SizeF textSize = p.Graphics.MeasureString(box.Text, box.Font);
             Rectangle titleRect = new Rectangle(0, 0, rect.Width, (int)(textSize.Height * 1.8));
 
@@ -250,7 +254,6 @@
                 int textY = (int)(textSize.Height / 10);
                 p.Graphics.DrawString(box.Text, box.Font, textBrush, textX, textY);
             }
-            p.Graphics.Clear(box.BackColor);
         }
 
         private GroupBox gbInput;
